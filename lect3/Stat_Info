@@ -1,0 +1,16 @@
+st_dev, st_ino :논리적 장치번호와 inode번호
+st_mode
+st_nlink
+st_uid, st_gid
+st_rdev :파일이 장치인 경우만 사용
+st_size :논리적 크기
+st_atime, st_mtime, st_ctime :access time, update time, stat구조의 update time
+st_blksize :I/O block 크기
+st_blocks :파일에 할당된 block의 수
+
+S_IRUSR S_IWUSR S_IXUSR S_IRGRP S_IWGRP S_IROTH
+
+S_ISDIR S_ISREG S_ISLINK
+
+S_ISUID 04000 : 실행이 시작되면 소유자의 uid가 euid가 된다.
+S_ISGID 02000 : 실행이 시작되면 소유자의 gid가 egid가 된다.
