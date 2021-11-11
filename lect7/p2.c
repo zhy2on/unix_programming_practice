@@ -16,9 +16,7 @@
 #include <sys/shm.h>
 #include <time.h>
 
-void catchint(int signo) {
-	printf("\n CATCHINT: signo=%d\n", signo);
-}
+void catchint(int);
 
 int main(void) {
 	int i, status;
@@ -30,7 +28,7 @@ int main(void) {
 
 	pid = fork();
 	if (pid == 0) {
-		for (i = 0; i < 10; i++) {
+		for (i = 0; i < 15; i++) {
 			printf("... child ... \n");
 			sleep(1);
 		}
@@ -39,12 +37,15 @@ int main(void) {
 	else {
 		sleep(5);
 		kill(pid, SIGINT);
-
-		wait(&status);
-		if (WIFEXITED(status))
-			printf("exits ... %d\n", WEXITSTATUS(status));
-		else if (WIFSIGNALED(status))
-			printf("terminated ... %d\n", WTERMSIG(status));
-		exit(0);
 	}
+	wait(&status);
+	if (WIFEXITED(status))
+		printf("exits ... %d\n", WEXITSTATUS(status));
+	else if (WIFSIGNALED(status))
+		printf("terminated ... %d\n", WTERMSIG(status));
+	exit(0);
+}
+
+void catchint(int signo) {
+	printf("\n CATCHINT: signo=%d\n", signo);
 }
