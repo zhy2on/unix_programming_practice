@@ -29,7 +29,7 @@ int main(void) {
 		scanf("%d", &num[i]);
 		sum += num[i];
 		for (j = 0; j <= i; j++) {
-			printf("... %d\n", num[j]);
+			printf("... i=%d num[%d]=%d\n", i, j, num[j]);
 			sleep(1);
 		}
 	}
