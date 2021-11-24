@@ -16,27 +16,28 @@
 #include <sys/shm.h>
 #include <time.h>
 
-// 단방향 통신
 int main(void) {	
-	char ch[512];
-	int pid, p[2];
+	int i, in , pid, p[2][2];
 
-	if (pipe(p) == -1) {
-		perror("pipe call");
-		exit(1);
-	}
+	for (i=0; i<2; i++) //순서 중요 - pipe를 만들고 fork를 해야 child에도 복사
+		pipe(p[i]);
 
 	pid = fork();
-	if (pid == 0) {
-		close(p[1]);
-		read(p[0], ch, 512);
-		printf("child: %s\n", ch);
+	if (pid==0) {
+		close(p[0][1]);
+		close(p[1][0]);
+		read(p[0][0], &in, sizeof(int));
+		in++;
+		write(p[1][1], &in, sizeof(int));
 		exit(0);
 	}
 
-	close(p[0]);
-	scanf("%s", ch);
-	write(p[1], ch, 512);
+	close(p[0][0]);
+	close(p[1][1]);
+	scanf("%d", &in);
+	write(p[0][1], &in, sizeof(int));
+	read(p[1][0], &in, sizeof(int));
+	printf("parent: %d\n", in);
 
 	wait(0);
 	exit(0);
