@@ -1,0 +1,6 @@
+void FD_ZERO(fd_set *fdset); //초기화
+void FD_SET(int fd, fd_set *fdset); //fdset의 fd bit을 1로 설정
+int FD_ISSET(inf fd, fd_set *fdset); //fdset의 fd bit이 1인지 검사
+void FD_CLR(int fd, fd_set *fdset); //fdset의 fd bit를 0으로 설정
+
+int select(int nfds, fd_set *readfds, fd_set *writefds, fd_set *errorfds, struct timeval *timeout);
