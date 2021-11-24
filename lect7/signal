@@ -1,0 +1,11 @@
+act.sa_handler = SIG_IGN;
+sigaction(SIGINT, &act, NULL); // SIGINT 무시
+
+act.sa_handler = SIG_DFL;
+sigaction(SIGINT, &act, NULL); // SIGINT 종료
+
+act.sa_handler = SIG_IGN;
+sigaction(SIGINT, &act, NULL);
+sigaction(SIGUSR1, &act, NULL); // 여러 개 처리할 때
+
+alarm signal은 exec 명령 후에도 적용 되지만, child process에는 적용되지 않는다.
