@@ -28,8 +28,8 @@ int main(void) {
 
 	key = ftok("key", 3);
 	qid = msgget(key, IPC_CREAT|0600);
-	for(i=0; i<2; i++) {
-		msgrcv(qid, &msg, sizeof(int), 3, 0);
+	for(i=0; i<4; i++) {
+		msgrcv(qid, &msg, sizeof(int), -2, 0);
 		printf("%d\n", msg.mnum);
 	}
 	return 0;
