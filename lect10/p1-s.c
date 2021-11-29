@@ -26,7 +26,7 @@ int main(void) {
 	key_t key;
 	struct q_entry msg;
 
-	key = ftok("key", 190);
+	key = ftok("key", 3);
 	qid = msgget(key, IPC_CREAT|0600);
 	for(i=0; i<3; i++) {
 		msgrcv(qid, &msg, sizeof(int), 0, 0);

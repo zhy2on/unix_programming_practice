@@ -28,11 +28,9 @@ int main(void) {
 
 	key = ftok("key", 3);
 	qid = msgget(key, IPC_CREAT|0600);
-	for(i=0; i<3; i++) {
-		scanf("%d", &in);
-		msg.mtype=1;
-		msg.mnum=in;
-		msgsnd(qid, &msg, sizeof(int), 0);
+	for(i=0; i<2; i++) {
+		msgrcv(qid, &msg, sizeof(int), 0, 0);
+		printf("%d\n", msg.mnum);
 	}
-	exit(0);
+	return 0;
 }
