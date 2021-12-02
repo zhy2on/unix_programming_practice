@@ -18,6 +18,7 @@ p3-c: p3-c.c
 p3-s: p3-s.c
 	gcc $< -o $@
 
+
 clean:
 	rm p1-s p1-c p2-s p2-c p3-s p3-c
 
